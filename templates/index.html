@@ -18,6 +18,11 @@
     <a href="{{ url_for('importing') }}">
       <li>Import</li>
     </a>
- </ul>
+  </ul>
+  <ul>
+  {% for row in artists : %}
+    <li>{{ row }}</li>
+  {% endfor %}
+  </ul>
 </body>
 </html>
