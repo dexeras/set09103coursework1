@@ -1,6 +1,24 @@
-DROP TABLE if EXISTS albums;
+DROP TABLE if EXISTS Tracks;
+DROP TABLE if EXISTS Albums;
+DROP TABLE if EXISTS Artists;
 
-CREATE TABLE albums (
-  title text,
-  artist text
+CREATE TABLE Artists(
+  ID INTEGER PRIMARY KEY AUTOINCREMENT,
+  Name varchar(255),
+  Bio varchar(2000)
+);
+
+CREATE TABLE Albums (
+  ID INTEGER PRIMARY KEY AUTOINCREMENT,
+  Title varchar(255),
+  ArtistID INTEGER,
+  FOREIGN KEY (ArtistID) REFERENCES Artists(ID)
+);
+
+CREATE TABLE Tracks(
+  ID INTEGER PRIMARY KEY AUTOINCREMENT,
+  Name varchar(255),
+  Length time,
+  AlbumID INTEGER,
+  FOREIGN KEY (AlbumID) REFERENCES Albums(ID)
 );

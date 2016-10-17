@@ -28,9 +28,9 @@ def init_db():
 @app.route("/")
 def index():
   db=get_db()
-  db.cursor().execute('insert into albums values ("Variations","5 majeur")')
+  db.cursor().execute('insert into Artists (Name,Bio) values ("5 majeur","Good crew")')
   db.commit()
-  sql='SELECT rowid, * FROM albums ORDER BY artist'
+  sql='SELECT * FROM Artists'
   query=db.cursor().execute(sql)
   artists=[]
   for row in query:
