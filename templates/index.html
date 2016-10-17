@@ -1,28 +1,8 @@
-<html>
-<head>
-  <title>The french rap collection !</title>
-</head>
-<body>
-  <ul>
-    <a href="{{ url_for('index') }}">
-      <li>
-        <img src="{{ url_for('static', filename = 'tmpLogo.jpg') }}"/>
-      </li>
-    </a>
-    <a href="{{ url_for('browse') }}">
-      <li>Browse</li>
-    </a>
-    <a href="{{ url_for('search') }}">
-      <li>Search</li>
-    </a>
-    <a href="{{ url_for('importing') }}">
-      <li>Import</li>
-    </a>
-  </ul>
+{% extends "layout.html" %}
+{%block content%}
   <ul>
   {% for row in artists : %}
     <li>{{ row }}</li>
   {% endfor %}
   </ul>
-</body>
-</html>
+{%endblock%}
