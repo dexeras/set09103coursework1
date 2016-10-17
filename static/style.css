@@ -1,0 +1,45 @@
+body, div, table, tr, td, img, ul, li, p, input, fieldset, h1, h2, h3{
+  padding: 0;
+  margin: 0;
+}
+
+ul{
+  list-style:none;
+}
+
+body {
+  font-family: arial;
+}
+
+#Content {
+  background-color: #DDD;
+  width: 70%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-top:50px;
+}
+
+#Logo {
+  position:fixed;
+  top:0;
+  z-index: 2;
+}
+
+#NavBar {
+  position:fixed;
+  width: 100%;
+  padding-left:200px;
+  top: 0;
+  background: #666;
+}
+
+#NavBar ul li {
+  display: inline;
+  padding: 0 5px;
+  line-height: 2;
+  color: #FFF;
+}
+
+#NavBar ul a{
+  text-decoration:none;
+}

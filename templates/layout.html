@@ -1,24 +1,29 @@
 <html>
 <head>
   <title>The french rap collection !</title>
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <ul>
+  <div id="Logo">
     <a href="{{ url_for('index') }}">
-      <li>
-        <img src="{{ url_for('static', filename = 'tmpLogo.jpg') }}"/>
-      </li>
+      <img src="{{ url_for('static', filename = 'tmpLogo.jpg') }}"/>
     </a>
-    <a href="{{ url_for('browse') }}">
-      <li>Browse</li>
-    </a>
-    <a href="{{ url_for('search') }}">
-      <li>Search</li>
-    </a>
-    <a href="{{ url_for('importing') }}">
-      <li>Import</li>
-    </a>
-  </ul>
-  {%block content%} {%endblock%}
+  </div>
+  <div id="NavBar">
+    <ul>
+      <a href="{{ url_for('browse') }}">
+        <li>Browse</li>
+      </a>
+      <a href="{{ url_for('search') }}">
+        <li>Search</li>
+      </a>
+      <a href="{{ url_for('importing') }}">
+        <li>Import</li>
+      </a>
+    </ul>
+  </div>
+  <div id="Content">
+    {%block content%} {%endblock%}
+  </div>
 </body>
 </html>
