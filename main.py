@@ -91,7 +91,12 @@ def importingAlbum():
     artist=request.form['artist']
     print title
     print artist
-    query= "insert into Albums(Title,ArtistID)values('"+title+"','"+artist+"')"
+    query= "select ID from Artists where Name='"+artist+"'"
+    artistID=db.cursor().execute(query)
+    artistID=artistID.fetchone()
+    artistID=str(artistID[0])
+    print artistID[0]
+    query= "insert into Albums(Title,ArtistID)values('"+title+"','"+artistID[0]+"')"
     db.cursor().execute(query)
     db.commit()
     return render_template('importAlbum.html')
