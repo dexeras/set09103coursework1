@@ -29,12 +29,22 @@ def init_db():
 def index():
   db=get_db()
   sql='SELECT * FROM Artists'
-  query=db.cursor().execute(sql)
+  queryArtists=db.cursor().execute(sql)
+  sql='select * from Albums'
+  queryAlbums=db.cursor().execute(sql)
+  sql='select * from Tracks'
+  queryTracks=db.cursor().execute(sql)
   artists=[]
-  for row in query:
+  albums=[]
+  tracks=[]
+  for row in queryArtists:
     artists.append(row)
+  for row in queryAlbums:
+    albums.append(row)
+  for row in queryTracks:
+    tracks.append(row)
   db.close()
-  return render_template('index.html',artists=artists)
+  return render_template('index.html',artists=artists,albums=albums,tracks=tracks)
 
 @app.route("/browse")
 def browse():
@@ -50,11 +60,11 @@ def importing():
 
 @app.route("/import/artist/", methods=['POST','GET'])
 def importingArtist():
+  db=get_db()
   if request.method=="GET":
     return render_template('importArtist.html')
   else:
     print request.form
-    db=get_db()
     name=request.form['name']
     bio=request.form['bio']
     print name
@@ -64,9 +74,27 @@ def importingArtist():
     db.commit()
     return render_template('importArtist.html')
 
-@app.route("/import/album")
+@app.route("/import/album", methods=['POST','GET'])
 def importingAlbum():
-  return render_template('importAlbum.html')
+  db=get_db()
+  if request.method=="GET":
+    query="select Name from Artists"
+    list=db.cursor().execute(query)
+    artists=[]
+    for row in list:
+      artists.append(row[0])
+    db.close()
+    return render_template('importAlbum.html',artists=artists)
+  else:
+    print request.form
+    title=request.form['title']
+    artist=request.form['artist']
+    print title
+    print artist
+    query= "insert into Albums(Title,ArtistID)values('"+title+"','"+artist+"')"
+    db.cursor().execute(query)
+    db.commit()
+    return render_template('importAlbum.html')
 
 @app.route("/import/track")
 def importingTrack():

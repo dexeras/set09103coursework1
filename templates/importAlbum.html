@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{%block content%}
+  <form action="" method="post" name="importAlbum">
+    <label for="title">Album's title : </label>
+    <input type="text" name="title" id="title"/>
+    <label for="artist">Album's Author : </label>
+    <Select name="artist" size="1">
+    {% for row in artists : %}
+      <option>{{row}}
+    {% endfor %}
+    </select>
+    <input type="submit" name="submit" id="submit"/>
+  </form>
+{%endblock%}
+
