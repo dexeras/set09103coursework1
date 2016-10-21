@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{%block content%}
+  <form ation="" method="post" name="importTrack">
+    <label for="name">Track's name : </label>
+    <input type="text" name="name" id="name"/>
+    <label for="length">Track's length : </label>
+    <input type="time" name="length" id="length"/>
+    <label for="album">Track's album : </label>
+    <Select name="album" size="1">
+    {% for row in albums : %}
+      <option>{{row}}
+    {% endfor %}
+    </select>
+    <input type="submit" name="submit" id="submit"/>
+  </form>
+{%endblock%}

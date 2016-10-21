@@ -101,9 +101,34 @@ def importingAlbum():
     db.commit()
     return render_template('importAlbum.html')
 
-@app.route("/import/track")
+@app.route("/import/track", methods=['POST','GET'])
 def importingTrack():
-  return render_template('importTrack.html')
+  db=get_db()
+  if request.method=="GET":
+    query="select Title from Albums"
+    list=db.cursor().execute(query)
+    albums=[]
+    for row in list:
+      albums.append(row[0])
+    db.close()
+    return render_template('importTrack.html',albums=albums)
+  else:
+    print request.form
+    name=request.form['name']
+    length=request.form['length']
+    album=request.form['album']
+    print name
+    print length
+    print album
+    query="select ID from Albums where Title='"+album+"'"
+    albumID=db.cursor().execute(query)
+    albumID=albumID.fetchone()
+    albumID=str(albumID[0])
+    print albumID[0]
+    query="insert into Tracks(Name,Length,AlbumID)values('"+name+"','"+length+"','"+albumID[0]+"')"
+    db.cursor().execute(query)
+    db.commit()
+    return render_template('importTrack.html')
 
 @app.errorhandler(404)
 def page_not_found(error):
