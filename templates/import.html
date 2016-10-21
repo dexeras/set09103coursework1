@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{%block content%}
+  <ul>
+    <a href="{{ url_for('importingArtist')}}">
+      <li>Create an artist</li>
+    </a>
+    <a href="{{ url_for('importingAlbum')}}">
+      <li>Create an album</li>
+    </a>
+    <a href="{{ url_for('importingTrack') }}">
+      <li>Create an track</li>
+    </a>
+  </ul>
+{%endblock%}

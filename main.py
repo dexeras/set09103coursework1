@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, redirect, g
+from flask import Flask, render_template, url_for, redirect, g, request
 import sqlite3
 
 app=Flask(__name__)
@@ -28,8 +28,6 @@ def init_db():
 @app.route("/")
 def index():
   db=get_db()
-  db.cursor().execute('insert into Artists (Name,Bio) values ("5 majeur","Good crew")')
-  db.commit()
   sql='SELECT * FROM Artists'
   query=db.cursor().execute(sql)
   artists=[]
@@ -48,7 +46,31 @@ def search():
 
 @app.route("/import")
 def importing():
-  return render_template('index.html')
+  return render_template('import.html')
+
+@app.route("/import/artist/", methods=['POST','GET'])
+def importingArtist():
+  if request.method=="GET":
+    return render_template('importArtist.html')
+  else:
+    print request.form
+    db=get_db()
+    name=request.form['name']
+    bio=request.form['bio']
+    print name
+    print bio
+    query = "insert into Artists(Name,Bio)values('"+name+"','"+bio+"')"
+    db.cursor().execute(query)
+    db.commit()
+    return render_template('importArtist.html')
+
+@app.route("/import/album")
+def importingAlbum():
+  return render_template('importAlbum.html')
+
+@app.route("/import/track")
+def importingTrack():
+  return render_template('importTrack.html')
 
 @app.errorhandler(404)
 def page_not_found(error):

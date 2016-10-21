@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{%block content%}
+  <form action="" method="post" name="importArtist">
+    <label for="name">Artist's name : </label>
+    <input type="text" name="name" id="name"/>
+    <label for="bio">Artist's bio : </label>
+    <textarea name="bio" id="bio" rows="10" cols="30"></textarea>
+    <input type="submit" name="submit" id="submit"/>
+  </form>
+{%endblock%}
