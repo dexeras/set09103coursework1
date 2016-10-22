@@ -3,7 +3,8 @@
   <h1>Artists : </h1>
   <ul>
   {% for row in artists : %}
-    <li>{{ row }}</li>
+    <li><a href="{{ url_for('browseArtist',artist=row[1]) }}">
+    {{ row[1] }}</a>, {{ row[2]}}</li>
   {% endfor %}
   </ul>
   <h1>Albums : </h1>

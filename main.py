@@ -50,6 +50,26 @@ def index():
 def browse():
   return render_template('index.html')
 
+@app.route("/browse/<artist>")
+def browseArtist(artist):
+  db=get_db()
+  query="Select * from Albums,Artists where Artists.Name='"+artist+"'and Albums.ArtistID=Artists.ID"
+  list=db.cursor().execute(query)
+  artistsAlbums=[]
+  for row in list:
+    artistsAlbums.append(row)
+  return render_template('browseArtist.html',artistsAlbums=artistsAlbums,artist = artist)
+
+@app.route("/browse/<artist>/<album>")
+def browseArtistsAlbum(artist,album):
+  db=get_db()
+  query="Select * from Tracks,Albums,Artists where Artists.Name='"+artist+"'and Albums.ArtistID=Artists.ID and Albums.Title='"+album+"' and Tracks.AlbumID=Albums.ID"
+  list=db.cursor().execute(query)
+  albumsTracks=[]
+  for row in list:
+    albumsTracks.append(row)
+  return render_template('browseAlbum.html',albumsTracks=albumsTracks,album=album, artist=artist)
+
 @app.route("/search")
 def search():
   return render_template('index.html')

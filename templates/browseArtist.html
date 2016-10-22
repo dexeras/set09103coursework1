@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{%block content%}
+  <h1>{{ artist }}</h1>
+  <ul>
+  {%for row in artistsAlbums :%}
+    <a href="{{ url_for('browseArtistsAlbum',artist=artist, album=row[1])}}">
+      <li>{{row[1]}}</li>
+    </a>
+  {%endfor%}
+  </ul>
+{%endblock%}

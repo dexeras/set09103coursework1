@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{%block content%}
+  <h1>{{artist}}</h1>
+  <h2>{{album}}</h2>
+  <ul>
+  {%for row in albumsTracks :%}
+    <li>{{row[1]}}, {{row[2]}}</li>
+  {%endfor%}
+  </ul>
+{%endblock%}
