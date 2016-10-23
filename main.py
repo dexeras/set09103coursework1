@@ -26,6 +26,7 @@ def init_db():
     db.commit()
 
 @app.route("/")
+@app.route("/browse")
 def index():
   db=get_db()
   sql='SELECT * FROM Artists'
@@ -45,10 +46,6 @@ def index():
     tracks.append(row)
   db.close()
   return render_template('index.html',artists=artists,albums=albums,tracks=tracks)
-
-@app.route("/browse")
-def browse():
-  return render_template('index.html')
 
 @app.route("/browse/<artist>")
 def browseArtist(artist):
@@ -72,7 +69,64 @@ def browseArtistsAlbum(artist,album):
 
 @app.route("/search")
 def search():
-  return render_template('index.html')
+  return render_template('search.html')
+
+@app.route("/search/artist", methods=['GET','POST'])
+def searchArtist():
+  if request.method =="POST" :
+    artist=request.form['artist']
+    print artist
+    return redirect(url_for('getArtists',artist=artist))
+  else :
+    return render_template('search.html')
+
+@app.route("/search/artist/<artist>")
+def getArtists(artist):
+  db=get_db()
+  query="Select * from Artists where Name='"+artist+"'"
+  list=db.cursor().execute(query)
+  artists=[]
+  for row in list:
+    artists.append(row)
+  return render_template('searchArtist.html',artist=artist,artists=artists)
+
+@app.route("/search/album", methods=['GET','POST'])
+def searchAlbum():
+  if request.method =="POST" :
+    album=request.form['album']
+    print album
+    return redirect(url_for('getAlbums',album=album))
+  else :
+    return render_template('search.html')
+
+@app.route("/search/album/<album>")
+def getAlbums(album):
+  db=get_db()
+  query="Select Albums.Title, Artists.Name from Albums,Artists where Albums.Title='"+album+"' and Albums.ArtistID=Artists.ID"
+  list=db.cursor().execute(query)
+  albums=[]
+  for row in list:
+    albums.append(row)
+  return render_template('searchAlbum.html',album=album,albums=albums)
+
+@app.route("/search/track", methods=['GET','POST'])
+def searchTrack():
+  if request.method =="POST" :
+    track=request.form['track']
+    print track
+    return redirect(url_for('getTracks',track=track))
+  else :
+    return render_template('search.html')
+
+@app.route("/search/track/<track>")
+def getTracks(track):
+  db=get_db()
+  query="Select Tracks.Name,Tracks.Length,Artists.Name,Albums.Title from Tracks,Albums,Artists where Tracks.Name='"+track+"' and Tracks.AlbumID=Albums.ID and Albums.ArtistID=Artists.ID"
+  list=db.cursor().execute(query)
+  tracks=[]
+  for row in list:
+    tracks.append(row)
+  return render_template('searchTrack.html',track=track,tracks=tracks)
 
 @app.route("/import")
 def importing():

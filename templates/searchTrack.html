@@ -1,0 +1,20 @@
+{% extends "layout.html"%}
+{%block content%}
+  <h1>Search's results : </h1>
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Length</th>
+      <th>Artist</th>
+      <th>Album</th>
+    </tr>
+    {%for row in tracks : %}
+      <tr>
+        <th>{{row[0]}}</th>
+        <th>{{row[1]}}</th>
+        <th><a href="{{url_for('browseArtist',artist=row[2])}}">{{row[2]}}</a></th>
+        <th><a href="{{url_for('browseArtistsAlbum',artist=row[2],album=row[3])}}">{{row[3]}}</a></th>
+      </tr>
+    {%endfor%}
+  </table>
+{%endblock%}

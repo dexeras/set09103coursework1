@@ -1,0 +1,21 @@
+{% extends "layout.html"%}
+{%block content%}
+  <h2>Search for an artist : </h2>
+  <form action="{{url_for('searchArtist')}}"method="post"name="searchArtist">
+    <label for="artist">Artist's name : </label>
+    <input type="text" name="artist" id="artist"/>
+    <input type="submit" name="submit" id="submit"/>
+  </form>
+  <h2>Search for an album : </h2>
+  <form action="{{url_for('searchAlbum')}}"method="post"name="searchAlbum">
+    <label for="album">Album's name : </label>
+    <input type="text" name="album" id="album"/>
+    <input type="submit" name="submit" id="submit"/>
+  </form>
+  <h2>Search for a track : </h2>
+  <form action="{{url_for('searchTrack')}}"method="post"name="searchTrack">
+    <label for="track">Track's name : </label>
+    <input type="text" name="track" id="track"/>
+    <input type="submit" name="submit" id="submit"/>
+  </form>
+{%endblock%}

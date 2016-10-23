@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{%block content%}
+  <h1>Search's results : </h1>
+  <table>
+    <tr>
+      <th>Picture</th>
+      <th>Name</th>
+      <th>Biography</th>
+    </tr>
+    {%for row in artists : %}
+    <tr>
+      <th><img src="{{url_for('static',filename='artistsPictures/'+row[1]+'.png')}}"/></th>
+      <th><a href="{{url_for('browseArtist',artist=row[1]) }}">{{row[1]}}</a></th>
+      <th>{{row[2]}}</th>
+    </tr>
+    {%endfor%}
+  </table>
+{%endblock%}
