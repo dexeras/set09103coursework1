@@ -146,10 +146,10 @@ def importingArtist():
     print bio
     print image
     image.save('static/artistsPictures/'+name+'.png')
-    query = "insert into Artists(Name,Bio)values('"+name+"','"+bio+"')"
+    query = 'insert into Artists(Name,Bio)values("'+name+'","'+bio+'")'
     db.cursor().execute(query)
     db.commit()
-    return render_template('importArtist.html')
+    return render_template('import.html')
 
 @app.route("/import/album", methods=['POST','GET'])
 def importingAlbum():
@@ -176,10 +176,10 @@ def importingAlbum():
     artistID=artistID.fetchone()
     artistID=str(artistID[0])
     print artistID[0]
-    query= "insert into Albums(Title,ArtistID)values('"+title+"','"+artistID[0]+"')"
+    query= 'insert into Albums(Title,ArtistID)values("'+title+'","'+artistID[0]+'")'
     db.cursor().execute(query)
     db.commit()
-    return render_template('importAlbum.html')
+    return render_template('import.html')
 
 @app.route("/import/track", methods=['POST','GET'])
 def importingTrack():
@@ -205,10 +205,10 @@ def importingTrack():
     albumID=albumID.fetchone()
     albumID=str(albumID[0])
     print albumID[0]
-    query="insert into Tracks(Name,Length,AlbumID)values('"+name+"','"+length+"','"+albumID[0]+"')"
+    query='insert into Tracks(Name,Length,AlbumID)values("'+name+'","'+length+'","'+albumID[0]+'")'
     db.cursor().execute(query)
     db.commit()
-    return render_template('importTrack.html')
+    return render_template('import.html')
 
 @app.errorhandler(404)
 def page_not_found(error):

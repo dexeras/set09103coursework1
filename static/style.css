@@ -43,3 +43,18 @@ body {
 #NavBar ul a{
   text-decoration:none;
 }
+
+table{
+  border-collapse: collapse;
+  width:100%;
+  table-layout:fixed;
+}
+
+table, th, td {
+  border:1px solid black;
+}
+
+table img{
+  height:auto;
+  width:300px;
+}
