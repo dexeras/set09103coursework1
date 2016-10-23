@@ -1,22 +1,18 @@
 {% extends "layout.html" %}
 {%block content%}
   <h1>Artists : </h1>
-  <ul>
-  {% for row in artists : %}
-    <li><a href="{{ url_for('browseArtist',artist=row[1]) }}">
-    {{ row[1] }}</a>, {{ row[2]}}</li>
-  {% endfor %}
-  </ul>
-  <h1>Albums : </h1>
-  <ul>
-  {% for row in albums : %}
-    <li>{{ row }}</li>
-  {% endfor %}
-  </ul>
-  <h1>Tracks : </h1>
-  <ul>
-  {% for row in tracks : %}
-    <li>{{ row }}</li>
-  {% endfor %}
-  </ul>
+  <table>
+    <tr>
+      <th>Picture</th>
+      <th>Name</th>
+      <th>Biography</th>
+    </tr>
+    {% for row in artists : %}
+      <tr>
+        <th><img src="{{url_for('static',filename='artistsPictures/'+row[1]+'.png')}}"/></th>
+        <th><a href="{{ url_for('browseArtist',artist=row[1]) }}">{{ row[1]}}</a></th>
+        <th>{{row[2]}}</th>
+      </tr>
+    {%endfor%}
+  </table>
 {%endblock%}

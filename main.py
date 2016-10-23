@@ -87,8 +87,11 @@ def importingArtist():
     print request.form
     name=request.form['name']
     bio=request.form['bio']
+    image=request.files['image']
     print name
     print bio
+    print image
+    image.save('static/artistsPictures/'+name+'.png')
     query = "insert into Artists(Name,Bio)values('"+name+"','"+bio+"')"
     db.cursor().execute(query)
     db.commit()
