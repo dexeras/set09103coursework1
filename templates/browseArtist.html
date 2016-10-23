@@ -1,11 +1,17 @@
 {% extends "layout.html" %}
 {%block content%}
   <h1>{{ artist }}</h1>
-  <ul>
-  {%for row in artistsAlbums :%}
-    <a href="{{ url_for('browseArtistsAlbum',artist=artist, album=row[1])}}">
-      <li>{{row[1]}}</li>
-    </a>
-  {%endfor%}
-  </ul>
+  <h2>Albums : </h2>
+  <table>
+    <tr>
+      <th>Picture</th>
+      <th>Title</th>
+    </tr>
+    {%for row in artistsAlbums : %}
+      <tr>
+        <th><img src="{{url_for('static',filename='albumsPictures/'+row[1]+'.png')}}"/></th>
+        <th><a href="{{url_for('browseArtistsAlbum',artist=artist,album=row[1])}}">{{row[1]}}</a></th>
+      </tr>
+    {%endfor%}
+  </table>
 {%endblock%}

@@ -2,9 +2,16 @@
 {%block content%}
   <h1>{{artist}}</h1>
   <h2>{{album}}</h2>
-  <ul>
-  {%for row in albumsTracks :%}
-    <li>{{row[1]}}, {{row[2]}}</li>
-  {%endfor%}
-  </ul>
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Length</th>
+    </tr>
+    {%for row in albumsTracks :%}
+      <tr>
+        <th>{{row[1]}}</th>
+        <th>{{row[2]}}</th>
+      </tr>
+    {%endfor%}
+  </table>
 {%endblock%}

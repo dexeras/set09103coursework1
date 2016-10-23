@@ -112,8 +112,11 @@ def importingAlbum():
     print request.form
     title=request.form['title']
     artist=request.form['artist']
+    image=request.files['image']
     print title
     print artist
+    print image
+    image.save('static/albumsPictures/'+title+'.png')
     query= "select ID from Artists where Name='"+artist+"'"
     artistID=db.cursor().execute(query)
     artistID=artistID.fetchone()

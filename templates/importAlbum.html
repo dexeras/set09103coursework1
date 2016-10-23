@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {%block content%}
-  <form action="" method="post" name="importAlbum">
+  <form action="" method="post"name="importAlbum"enctype="multipart/form-data">
     <label for="title">Album's title : </label>
     <input type="text" name="title" id="title"/>
     <label for="artist">Album's Author : </label>
@@ -9,7 +9,8 @@
       <option>{{row}}
     {% endfor %}
     </select>
+    <label for="image">Album's picture : </label>
+    <input type="file" name="image" id="image"/>
     <input type="submit" name="submit" id="submit"/>
   </form>
 {%endblock%}
-
